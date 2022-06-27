@@ -9,7 +9,7 @@ import numpy as np
 
 for subset in ["train", "val"]:
 
-    mask_path = f"dataset/{subset}/"
+    mask_path = f"coco_panoptic/annotations/panoptic_{subset}2017/"
     # Define the ids that are a multiplolygon. for example: wall, roof and sky
     multipolygon_ids = []  # , 1, 2,3]
 
@@ -204,7 +204,7 @@ for subset in ["train", "val"]:
     # ===========================
     # Final Step: Write to JSON
     # ===========================
-    with open(f"dataset/annotations/panoptic_{subset}.json", "w") as outfile:
+    with open(f"coco_panoptic/annotations/panoptic_{subset}2017.json", "w") as outfile:
         json.dump(coco_format, outfile)
-        print("Done!")
+        print(f"{subset} done!")
 
