@@ -83,7 +83,7 @@ for subset in ["train", "val"]:
         # The mask image is *.png but the original image is *.jpg.
         # We make a reference to the original file in the COCO JSON file
 
-        original_file_name = os.path.basename(mask_image).split(".")[0] + ".jpeg"
+        original_file_name = os.path.basename(mask_image).split(".")[0] + ".jpg"
         # print(original_file_name)
         # Open the image and (to be sure) we convert it to RGB
         mask_image_open = Image.open(mask_image).convert("RGB")
