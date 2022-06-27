@@ -15,7 +15,8 @@ pixel_array[100:200, 100:200, :] = color3
 
 print(pixel_array.shape)
 for i in range(10):
-    cv2.imwrite(f'dataset/fake_mask/fake_mask_{i}.png', pixel_array)
+    cv2.imwrite(f'dataset/train/fake_mask_{i}.png', pixel_array)
+    cv2.imwrite(f'dataset/val/fake_mask_{i+1000}.png', pixel_array)
 
-cv2.imshow('image', pixel_array)
-cv2.waitKey(0)
+# cv2.imshow('image', pixel_array)
+# cv2.waitKey(0)
