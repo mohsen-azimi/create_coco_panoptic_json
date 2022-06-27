@@ -194,7 +194,7 @@ for subset in ["train", "val"]:
 
         coco_format["annotations"].append({
                             "segments_info": segments_info,
-                            "file_name": original_file_name[:-5] + '.png',
+                            "file_name": original_file_name[:-4] + '.png',
                             "image_id": width,
             })
 
