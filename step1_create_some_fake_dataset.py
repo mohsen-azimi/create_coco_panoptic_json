@@ -18,7 +18,7 @@ for i in range(5):
     cv2.imwrite(f'coco_panoptic/panoptic_train2017/fake_train_{i}.png', pixel_array)  # annotation
     cv2.imwrite(f'coco_panoptic/train2017/fake_train_{i}.jpg', pixel_array)  # data
 
-    cv2.imwrite(f'coco_panoptic//panoptic_val2017/fake_val_{i}.png', pixel_array)  # annotation
+    cv2.imwrite(f'coco_panoptic/panoptic_val2017/fake_val_{i}.png', pixel_array)  # annotation
     cv2.imwrite(f'coco_panoptic/val2017/fake_val_{i}.jpg', pixel_array)  # data
 
 # cv2.imshow('image', pixel_array)
