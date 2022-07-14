@@ -26,4 +26,5 @@
 ## 4. Create json files
 
 `python step2_create_panoptic_json.py` 
+
 `python step3_create_instances_json.py`
