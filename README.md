@@ -19,10 +19,11 @@
 
 `$ pip install -r requirements.txt`
 
-## 3. Create some fake data
+## 3. Step1. Create some fake data
 
-`python create_some_fake_dataset.py`
+`python step1_create_some_fake_dataset.py`
 
 ## 4. Create json files
 
-`python main.py`
+`python step2_create_panoptic_json.py` 
+`python step3_create_instances_json.py`
