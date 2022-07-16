@@ -6,8 +6,8 @@ height = 480
 width = 640
 
 bg = (0, 0, 0)  # b
-color2 = (0, 255, 0)  # g
-color3 = (0, 0, 255)  # r
+color2 = (255, 255, 255)
+color3 = (255, 255, 255)
 pixel_array = numpy.full((height, width, 3), bg, dtype=numpy.uint8)
 
 pixel_array[10:100, 10:100, :] = color2

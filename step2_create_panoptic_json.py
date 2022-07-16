@@ -109,6 +109,7 @@ for subset in ["train", "val"]:
                 if pixel != (0, 0, 0):
                     # Check to see if we've created a sub-mask...
                     pixel_str = str(pixel)
+                    # print(pixel_str)
                     sub_mask = sub_masks.get(pixel_str)
                     if sub_mask is None:
                         # Create a sub-mask (one bit per pixel) and add to the dictionary
