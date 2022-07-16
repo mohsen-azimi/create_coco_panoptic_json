@@ -53,7 +53,6 @@ for subset in ["train", "val"]:
         # "(128, 0, 0)": 4,
     }
     # Create category section
-    # coco_format["categories"] = create_category_annotation(category_ids)
 
     coco_format["categories"] = []
     for key, value in category_ids.items():
@@ -205,7 +204,6 @@ for subset in ["train", "val"]:
     # Final Step: Write to JSON
     # ===========================
     with open(f"coco_panoptic/annotations/panoptic_{subset}2017.json", 'w') as outfile:
-
         json.dump(coco_format, outfile)
         print(f"{subset} done!")
 
