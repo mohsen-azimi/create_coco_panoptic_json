@@ -20,6 +20,6 @@ for i in range(5):
     cv2.imwrite(f'coco_panoptic/panoptic_val2017/fake_val_{i}.png', pixel_array)  # annotation
     cv2.imwrite(f'coco_panoptic/val2017/fake_val_{i}.jpg', pixel_array)  # data
 
-print(f"created {i} images")
+print(f"created {i+1} images")
 # cv2.imshow('image', pixel_array)
 # cv2.waitKey(0)
