@@ -118,7 +118,7 @@ if __name__ == "__main__":
         coco_format["images"], coco_format["annotations"], annotation_cnt = images_annotations_info(mask_path)
 
         # Save the JSON file
-        with open(f"coco_panoptic/annotations/instances_{subset}2017.json", "w") as outfile:
+        with open(f"coco_panoptic/annotations/instances_{subset}2017.json", 'w') as outfile:
             json.dump(coco_format, outfile)
             # print(f"{subset} done!")
 

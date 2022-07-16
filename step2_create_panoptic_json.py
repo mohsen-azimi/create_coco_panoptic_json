@@ -204,7 +204,8 @@ for subset in ["train", "val"]:
     # ===========================
     # Final Step: Write to JSON
     # ===========================
-    with open(f"coco_panoptic/annotations/panoptic_{subset}2017.json", "w") as outfile:
+    with open(f"coco_panoptic/annotations/panoptic_{subset}2017.json", 'w') as outfile:
+
         json.dump(coco_format, outfile)
         print(f"{subset} done!")
 
