@@ -175,7 +175,7 @@ for subset in ["train", "val"]:
 
                 min_w, min_h, max_w, max_h = multi_poly.bounds
                 annotation = {
-                    "segmentation": segmentation,
+                    "segmentation": segmentations,
                     "area": multi_poly.area,
                     "iscrowd": 0,
                     "image_id": image_id,
@@ -184,18 +184,18 @@ for subset in ["train", "val"]:
                     "id": annotation_id,
                     "category_id": category_id,
                 }
-                annotations.append(annotation)
+                coco_format["annotations"].append(annotation)
                 annotation_id += 1
 
             else:
                 for i in range(len(polygons)):
 
                     # Cleaner to recalculate this variable
-                    segmentation = [np.array(polygons[i].exterior.coords).ravel().tolist()]
+                    segmentations = [np.array(polygons[i].exterior.coords).ravel().tolist()]
 
                     min_w, min_h, max_w, max_h = polygons[i].bounds
                 annotation = {
-                    "segmentation": segmentation,
+                    "segmentation": segmentations,
                     "area": polygons[i].area,
                     "iscrowd": 0,
                     "image_id": image_id,
@@ -204,7 +204,7 @@ for subset in ["train", "val"]:
                     "id": annotation_id,
                     "category_id": category_id,
                 }
-                annotations.append(annotation)
+                coco_format["annotations"].append(annotation)
                 annotation_id += 1
         image_id += 1
 
