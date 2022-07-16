@@ -7,14 +7,14 @@ width = 640
 
 
 for i in range(6):
-    i = np.random.randint(10, 100)
+    rand_i = np.random.randint(10, 300)
 
     bg = (0, 0, 0)  # b
-    color2 = (255, 255, 255)
-    color3 = (255, 255, 255)
+    color1 = (255, 255, 255)
+    # color2 = (255, 255, 255)
     pixel_array = numpy.full((height, width, 3), bg, dtype=numpy.uint8)
 
-    pixel_array[i:i+100, i:i+100, :] = color2
+    pixel_array[rand_i:rand_i+100, rand_i:rand_i+100, :] = color1
     # pixel_array[110:200, 110:200, :] = color3
 
 
