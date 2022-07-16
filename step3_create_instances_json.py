@@ -101,8 +101,9 @@ for subset in ["train", "val"]:
                 "file_name": original_file_name,
                 "height": height,
                 "width": width,
-                "id": image_id
+                "id": image_id,
             })
+
 
 
         # 2. Sub masks

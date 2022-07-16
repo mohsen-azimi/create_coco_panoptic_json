@@ -9,7 +9,7 @@ import numpy as np
 
 for subset in ["train", "val"]:
 
-    mask_path = f"coco_panoptic/annotations/panoptic_{subset}2017/"
+    mask_path = f"coco_panoptic/panoptic_{subset}2017/"
     # Define the ids that are a multiplolygon. for example: wall, roof and sky
     multipolygon_ids = []  # , 1, 2,3]
 
@@ -205,5 +205,11 @@ for subset in ["train", "val"]:
     # ===========================
     with open(f"coco_panoptic/annotations/panoptic_{subset}2017.json", 'w') as outfile:
         json.dump(coco_format, outfile)
-        print(f"{subset} done!")
+
+        if image_id == 0:
+            print("No annotations created for images in folder: %s" % mask_path)
+        else:
+            print("Created %d annotations for '%s' images in folder: %s" % (image_id, subset, mask_path))
+            print("JSON file saved to: %s" % outfile.name)
+
 
