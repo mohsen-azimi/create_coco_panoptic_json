@@ -33,7 +33,7 @@ for subset in ["train", "val"]:
 
 
     category_ids = {
-        # "obj00": 0,
+        "(0, 0, 0)": 0,
         # "obj11": 1,
         # "obj22": 2,
         # "obj33": 3,
@@ -44,7 +44,7 @@ for subset in ["train", "val"]:
     }
 
     category_colors = {
-        # "(0, 0, 0)": 0,  # null
+        "(0, 0, 0)": 0,
         "(255, 0, 0)": 25511,
         "(0, 255, 0)": 12551,
         "(0, 0, 255)": 11255,
