@@ -99,17 +99,14 @@ class CreateCocoFormatInstances():
             sub_masks[str(sub_mask_id)] = sub_mask
         return sub_masks
 
-
     def create_annotations_from_sub_masks(self, sub_masks):
 
         pan_annotation = {'segments_info': [],
                           'file_name': self.cache_file_name,
-                          'image_id': self.cache_image_id} #updates/each image
+                          'image_id': self.cache_image_id}  # updates/each image
 
         # 4. Create annotations
         for sub_mask_id, sub_mask in sub_masks.items():
-            # print(sub_mask_id)
-
             self.cache_category_id = int(sub_mask_id) // self.images_info['info'][
                 'categories_color_bin_size']  # semantic
 
@@ -128,91 +125,90 @@ class CreateCocoFormatInstances():
                     self.cache_insSeg_id += 1
 
                     pan_annotation['segments_info'].append({
-                    "id": self.cache_panSeg_id,
-                    "category_id": self.cache_category_id,
-                    "iscrowd": 0,
-                    "bbox": cv2.boundingRect(contour),
-                    "area": cv2.contourArea(contour)})
+                        "id": self.cache_panSeg_id,
+                        "category_id": self.cache_category_id,
+                        "iscrowd": 0,
+                        "bbox": cv2.boundingRect(contour),
+                        "area": cv2.contourArea(contour)})
                     self.cache_panSeg_id += 1
 
-            pan_annotation['segments_info'].append(pan_annotation) # appends/1image
+        self.coco_panoptic["annotations"].append(pan_annotation) # updates/1 image
 
-
-            #
-            #
-            #
-            #
-            #
-            # # contours = measure.find_contours(np.array(sub_mask), 0.5, positive_orientation="low")
-            # polygons = []
-            # segmentations = []
-            #
-            # for contour in contours:
-            #     # Flip from (row, col) representation to (x, y) and subtract the padding pixel
-            #     for i in range(len(contour)):
-            #         row, col = contour[i]
-            #         contour[i] = (col - 1, row - 1)
-            #
-            #     # Make a polygon and simplify it
-            #     poly = Polygon(contour)
-            #     poly = poly.simplify(1.0, preserve_topology=False)
-            #
-            #     print(poly)
-            #     if poly.area > 5:  # Ignore tiny polygons
-            #         if poly.geom_type == 'MultiPolygon':
-            #             # if MultiPolygon, take the smallest convex Polygon containing all the points in the object
-            #             poly = poly.convex_hull
-            #
-            #         if poly.geom_type == 'Polygon':  # Ignore if still not a Polygon (could be a line or point)
-            #             polygons.append(poly)
-            #             segmentation = np.array(poly.exterior.coords).ravel().tolist()
-            #             segmentations.append(segmentation)
-            #
-            #         if len(polygons) == 0:
-            #             # This item doesn't have any visible polygons, ignore it
-            #             # (This can happen if a randomly placed foreground is covered up by other foregrounds)
-            #             continue
-            #
-            # # Check if we have classes that are a multipolygon
-            # multipolygon_ids = [] # list of ids of polygons that are multipolygons
-            # if cat in multipolygon_ids:
-            #     print("cat is multipolygon", cat)
-            #     # Combine the polygons to calculate the bounding box and area
-            #     multi_poly = MultiPolygon(polygons)
-            #
-            #     min_w, min_h, max_w, max_h = multi_poly.bounds
-            #     annotation = {
-            #         "segmentation": segmentations,
-            #         "area": multi_poly.area,
-            #         "iscrowd": 0,
-            #         "image_id": self.cache_image_id,
-            #         "bbox": [min_w, min_h, (max_w - min_w), (max_h - min_h)],
-            #
-            #         "id": self.cache_annotation_id,
-            #         "category_id": self.cache_category_id,
-            #     }
-            #
-            #     self.coco_format["annotations"].append(annotation)
-            #     self.cache_annotation_id += 1
-            #
-            # else:
-            #     print(f"{cat} is not a multipolygon!")
-            #
-            #     for i in range(len(polygons)):
-            #         # Cleaner to recalculate this variable
-            #         segmentations = [np.array(polygons[i].exterior.coords).ravel().tolist()]
-            #         min_w, min_h, max_w, max_h = polygons[i].bounds
-            #
-            #     annotation = {
-            #         "segmentation": segmentations,
-            #         "area": polygons[i].area,
-            #         "iscrowd": 0,
-            #         "image_id": self.cache_image_id,
-            #         "bbox": [min_w, min_h, (max_w - min_w), (max_h - min_h)],
-            #
-            #         "id": self.cache_annotation_id,
-            #         "category_id": self.cache_category_id,
-            #     }
-            #     self.coco_format["annotations"].append(annotation)
-            #     self.cache_annotation_id += 1
-            #
+        #
+        #
+        #
+        #
+        #
+        # # contours = measure.find_contours(np.array(sub_mask), 0.5, positive_orientation="low")
+        # polygons = []
+        # segmentations = []
+        #
+        # for contour in contours:
+        #     # Flip from (row, col) representation to (x, y) and subtract the padding pixel
+        #     for i in range(len(contour)):
+        #         row, col = contour[i]
+        #         contour[i] = (col - 1, row - 1)
+        #
+        #     # Make a polygon and simplify it
+        #     poly = Polygon(contour)
+        #     poly = poly.simplify(1.0, preserve_topology=False)
+        #
+        #     print(poly)
+        #     if poly.area > 5:  # Ignore tiny polygons
+        #         if poly.geom_type == 'MultiPolygon':
+        #             # if MultiPolygon, take the smallest convex Polygon containing all the points in the object
+        #             poly = poly.convex_hull
+        #
+        #         if poly.geom_type == 'Polygon':  # Ignore if still not a Polygon (could be a line or point)
+        #             polygons.append(poly)
+        #             segmentation = np.array(poly.exterior.coords).ravel().tolist()
+        #             segmentations.append(segmentation)
+        #
+        #         if len(polygons) == 0:
+        #             # This item doesn't have any visible polygons, ignore it
+        #             # (This can happen if a randomly placed foreground is covered up by other foregrounds)
+        #             continue
+        #
+        # # Check if we have classes that are a multipolygon
+        # multipolygon_ids = [] # list of ids of polygons that are multipolygons
+        # if cat in multipolygon_ids:
+        #     print("cat is multipolygon", cat)
+        #     # Combine the polygons to calculate the bounding box and area
+        #     multi_poly = MultiPolygon(polygons)
+        #
+        #     min_w, min_h, max_w, max_h = multi_poly.bounds
+        #     annotation = {
+        #         "segmentation": segmentations,
+        #         "area": multi_poly.area,
+        #         "iscrowd": 0,
+        #         "image_id": self.cache_image_id,
+        #         "bbox": [min_w, min_h, (max_w - min_w), (max_h - min_h)],
+        #
+        #         "id": self.cache_annotation_id,
+        #         "category_id": self.cache_category_id,
+        #     }
+        #
+        #     self.coco_format["annotations"].append(annotation)
+        #     self.cache_annotation_id += 1
+        #
+        # else:
+        #     print(f"{cat} is not a multipolygon!")
+        #
+        #     for i in range(len(polygons)):
+        #         # Cleaner to recalculate this variable
+        #         segmentations = [np.array(polygons[i].exterior.coords).ravel().tolist()]
+        #         min_w, min_h, max_w, max_h = polygons[i].bounds
+        #
+        #     annotation = {
+        #         "segmentation": segmentations,
+        #         "area": polygons[i].area,
+        #         "iscrowd": 0,
+        #         "image_id": self.cache_image_id,
+        #         "bbox": [min_w, min_h, (max_w - min_w), (max_h - min_h)],
+        #
+        #         "id": self.cache_annotation_id,
+        #         "category_id": self.cache_category_id,
+        #     }
+        #     self.coco_format["annotations"].append(annotation)
+        #     self.cache_annotation_id += 1
+        #
