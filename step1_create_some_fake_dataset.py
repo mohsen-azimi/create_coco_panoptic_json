@@ -34,7 +34,7 @@ for subset, n_images in fake_dataset.items():
     for i in range(n_images):
         seed += 1
         np.random.seed(seed)  # to get same random numbers every time
-        rand_i = np.random.randint(10, 200)  # random integer between 10 and 200
+        rand_i = np.random.randint(50, 200)  # random integer between 10 and 200
         mask = np.zeros((height, width), dtype="uint8")  # uint16 to save more color ids easily!
 
         # Categorys: 0 = null, 1 = sky, 2 = ground, 3 = circle, 4 = rectangle,...
