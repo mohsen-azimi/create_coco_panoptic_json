@@ -113,7 +113,7 @@ class CreateCocoFormatInstances():
 
             contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-            print("--", hierarchy)
+            # print("--", hierarchy)
             for contour in contours:
                 if cv2.contourArea(contour) > 0:
                     self.coco_instance["annotations"].append({
