@@ -27,9 +27,11 @@ class CreateCocoFormatInstances():
 
         self.color_palette = {}
         self.cache_image_id = 0
-        self.cache_annotation_id = 0
+        # self.cache_annotation_id = 0
         self.cache_category_id = 0
-        self.cache_segmentation_id = 0
+        # self.cache_segmentation_id = 0
+        self.cache_insSeg_id = 0
+        self.cache_panSeg_id = 0
         self.images_info = None  # to cache categories information
 
     def load_categories(self):
@@ -99,6 +101,11 @@ class CreateCocoFormatInstances():
 
 
     def create_annotations_from_sub_masks(self, sub_masks):
+
+        pan_annotation = {'segments_info': [],
+                          'file_name': self.cache_file_name,
+                          'image_id': self.cache_image_id} #updates/each image
+
         # 4. Create annotations
         for sub_mask_id, sub_mask in sub_masks.items():
             # print(sub_mask_id)
@@ -109,41 +116,27 @@ class CreateCocoFormatInstances():
             contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
             for contour in contours:
-
-                instance_annotation = {
-                    "iscrowd": 0,
-                    "id": self.cache_annotation_id,
-                    "image_id": self.cache_image_id,
-                    "category_id": self.cache_category_id,
-                    "bbox": cv2.boundingRect(contour),
-                    "area": cv2.contourArea(contour),
-                    "segmentation": [contour.flatten().tolist()]}
-
-                # panoptic
-                pan_segment_info = {}
-                pan_segments_info = {'segments_info': [],
-                                     'file_name': self.cache_file_name,
-                                     'image_id': self.cache_image_id}
-                pan_segment_id = 0
-
-                for i in contours:
-                    pan_segment_info = {
-                        "id": pan_segment_id,
-                        "category_id": self.cache_category_id,
+                if cv2.contourArea(contour) > 0:
+                    self.coco_instance["annotations"].append({
                         "iscrowd": 0,
+                        "id": self.cache_insSeg_id,
+                        "image_id": self.cache_image_id,
+                        "category_id": self.cache_category_id,
                         "bbox": cv2.boundingRect(contour),
                         "area": cv2.contourArea(contour),
-                    }
-                    pan_segment_id += 1  # TODO: check if it is correct, compare JSON
-                    pan_segments_info['segments_info'].append(pan_segment_info)
+                        "segmentation": [contour.flatten().tolist()]})
+                    self.cache_insSeg_id += 1
 
-                if instance_annotation['area'] > 0:
-                    self.coco_instance["annotations"].append(instance_annotation)
-                    self.coco_panoptic["annotations"].append(pan_segments_info)
+                    pan_annotation['segments_info'].append({
+                    "id": self.cache_panSeg_id,
+                    "category_id": self.cache_category_id,
+                    "iscrowd": 0,
+                    "bbox": cv2.boundingRect(contour),
+                    "area": cv2.contourArea(contour)})
+                    self.cache_panSeg_id += 1
 
-                    self.cache_annotation_id += 1
+            pan_annotation['segments_info'].append(pan_annotation) # appends/1image
 
-                # print( int(sub_mask_id)//10, sub_mask_id )
 
             #
             #
