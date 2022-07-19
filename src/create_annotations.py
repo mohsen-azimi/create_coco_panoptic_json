@@ -29,6 +29,7 @@ class CreateCocoFormatInstances():
         self.cache_image_id = 0
         self.cache_file_name = None
         self.cache_category_id = 0
+        # self.cache_segmentation_id = 0
         self.cache_insSeg_id = 0
         self.cache_panSeg_id = 0
         self.images_info = None  # to cache categories information
@@ -59,15 +60,14 @@ class CreateCocoFormatInstances():
         self.color_palette_list = list(chain.from_iterable([self.color_palette[key] for key in self.color_palette]))
 
     def create_annotations(self, mask_image, imshow=False):
-        original_file_name = os.path.basename(mask_image).split(".")[0] + ".jpg"
+        self.cache_file_name = os.path.basename(mask_image).split(".")[0] + ".jpg"
 
-        self.cache_file_name = original_file_name
 
         # 1. Load mask image
         mask = cv2.imread(mask_image, cv2.IMREAD_GRAYSCALE)
         # update the coco format with the image info
         image = {
-            "file_name": original_file_name,
+            "file_name": self.cache_file_name,
             "height": mask.shape[0],
             "width": mask.shape[1],
             "id": self.cache_image_id
@@ -77,7 +77,7 @@ class CreateCocoFormatInstances():
         self.coco_panoptic["images"].append(image)  # Same as instance format
 
         if imshow:
-            cv2.imshow(f"mask {original_file_name}", mask)
+            cv2.imshow(f"mask {self.cache_file_name}", mask)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
@@ -101,8 +101,8 @@ class CreateCocoFormatInstances():
     def create_annotations_from_sub_masks(self, sub_masks):
 
         pan_annotation = {'segments_info': [],
-                          'file_name': self.cache_file_name,
-                          'image_id': self.cache_file_name[:-4]+'png'}  # updates/each image
+                          'file_name': self.cache_file_name.split(".")[0]+'.png',
+                          'image_id': self.cache_image_id}  # updates/each image
 
         # 4. Create annotations
         for sub_mask_id, sub_mask in sub_masks.items():
