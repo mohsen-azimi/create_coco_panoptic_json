@@ -39,8 +39,8 @@ class CreateCocoFormatInstances():
             self.images_info = json.load(f)
         for cat in self.images_info['categories']:
             instance_category = {
-                "supercategory": cat['supercategory'],  # no super category for now (replace with "if", later)
-                "isthing": cat['isthing'],  # countable or not
+                "supercategory": cat['supercategory'],
+                "isthing": cat['isthing'],
                 "id": cat['id'],
                 "name": cat['name'],
                 "color": cat['color']
@@ -72,7 +72,6 @@ class CreateCocoFormatInstances():
             "width": mask.shape[1],
             "id": self.cache_image_id
         }
-        # print("----", image)
         self.coco_instance["images"].append(image)
         self.coco_panoptic["images"].append(image)  # Same as instance format
 
@@ -96,6 +95,7 @@ class CreateCocoFormatInstances():
             sub_mask = mask == sub_mask_id
             sub_mask = sub_mask.astype(np.uint8)
             sub_masks[str(sub_mask_id)] = sub_mask
+            # print(np.unique(mask))
         return sub_masks
 
     def create_annotations_from_sub_masks(self, sub_masks):
@@ -108,6 +108,8 @@ class CreateCocoFormatInstances():
         for sub_mask_id, sub_mask in sub_masks.items():
             self.cache_category_id = int(sub_mask_id) // self.images_info['info'][
                 'categories_color_bin_size']  # semantic
+            print(self.cache_category_id, '=', int(sub_mask_id),'/',self.images_info['info'][
+                'categories_color_bin_size'])
 
             contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 

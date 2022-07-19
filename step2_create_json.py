@@ -11,7 +11,7 @@ for subset in subsets:
     my_coco = COCO()  # create an instance of the class CreateCocoFormat()
     my_coco.load_categories()  # load categories from images_info.json
 
-    for mask_image in glob.glob(f"coco_panoptic/panoptic_{subset}2017/*.png"):
+    for mask_image in glob.glob(f"coco_panoptic/panoptic_gray/{subset}/*.png"):
         my_coco.create_annotations(mask_image, imshow=False)  # create annotations from masks
         my_coco.cache_image_id += 1
 
