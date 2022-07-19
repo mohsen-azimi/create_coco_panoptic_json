@@ -1,0 +1,63 @@
+{
+	"info": {"categories_color_bin_size": 10},
+	"licenses": [],
+	"images": [
+		{
+			"file_name": "0.jpg",
+			"height": 427,
+			"width": 640,
+			"id": 0
+		}
+	],
+	"categories": [
+		{
+			"supercategory": "sky",
+			"color": [
+				0,
+				0,
+				255
+			],
+			"isthing": 0,
+			"id": 1,
+			"name": "sky"
+		},
+
+
+		{
+			"supercategory": "ground",
+			"color": [
+				0,
+				255,
+				0
+			],
+			"isthing": 0,
+			"id": 2,
+			"name": "ground"
+		},
+
+		{
+			"supercategory": "circle",
+			"color": [
+				250,
+				150,
+				255
+			],
+			"isthing": 1,
+			"id": 3,
+			"name": "circle"
+		},
+
+		{
+			"supercategory": "rectangle",
+			"color": [
+				100,
+				255,
+				200
+			],
+			"isthing": 1,
+			"id": 4,
+			"name": "rectangle"
+		}
+
+	]
+}

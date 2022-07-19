@@ -1,5 +1,5 @@
 .nfs*
-*.ipynb
+
 *.pyc
 .dumbo.json
 .DS_Store
@@ -7,7 +7,7 @@
 *.pth
 **/__pycache__/**
 .ipynb_checkpoints/
-datasets/data/
+
 experiment-*
 *.tmp
 *.pkl
@@ -18,41 +18,9 @@ __pycache__/
 .idea/
 
 
-
-# Compiled source #
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
-*.bag
-*.mat
-*.png
-*.ply
 *.jpg
 *.png
-*.json
+
 
 # OS generated files #
 ######################
@@ -63,7 +31,3 @@ __pycache__/
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# other files
-test_a_code.py
-git.txt
