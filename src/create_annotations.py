@@ -111,7 +111,7 @@ class CreateCocoFormatInstances():
             # print(self.cache_category_id, '=', int(sub_mask_id),'/',self.images_info['info'][
             #     'categories_color_bin_size'])
 
-            contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+            contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
             print("--", hierarchy)
             for contour in contours:
