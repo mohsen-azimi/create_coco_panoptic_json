@@ -103,7 +103,7 @@ class CreateCocoFormatInstances():
 
         pan_annotation = {'segments_info': [],
                           'file_name': self.cache_file_name,
-                          'image_id': self.cache_image_id}  # updates/each image
+                          'image_id': self.cache_image_id[:-4]+'png'}  # updates/each image
 
         # 4. Create annotations
         for sub_mask_id, sub_mask in sub_masks.items():
