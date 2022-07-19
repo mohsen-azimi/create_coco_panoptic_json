@@ -27,9 +27,8 @@ class CreateCocoFormatInstances():
 
         self.color_palette = {}
         self.cache_image_id = 0
-        # self.cache_annotation_id = 0
+        self.cache_file_name = None
         self.cache_category_id = 0
-        # self.cache_segmentation_id = 0
         self.cache_insSeg_id = 0
         self.cache_panSeg_id = 0
         self.images_info = None  # to cache categories information
@@ -103,7 +102,7 @@ class CreateCocoFormatInstances():
 
         pan_annotation = {'segments_info': [],
                           'file_name': self.cache_file_name,
-                          'image_id': self.cache_image_id[:-4]+'png'}  # updates/each image
+                          'image_id': self.cache_file_name[:-4]+'png'}  # updates/each image
 
         # 4. Create annotations
         for sub_mask_id, sub_mask in sub_masks.items():
