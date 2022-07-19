@@ -108,11 +108,12 @@ class CreateCocoFormatInstances():
         for sub_mask_id, sub_mask in sub_masks.items():
             self.cache_category_id = int(sub_mask_id) // self.images_info['info'][
                 'categories_color_bin_size']  # semantic
-            print(self.cache_category_id, '=', int(sub_mask_id),'/',self.images_info['info'][
-                'categories_color_bin_size'])
+            # print(self.cache_category_id, '=', int(sub_mask_id),'/',self.images_info['info'][
+            #     'categories_color_bin_size'])
 
             contours, hierarchy = cv2.findContours(sub_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
+            print("--", hierarchy)
             for contour in contours:
                 if cv2.contourArea(contour) > 0:
                     self.coco_instance["annotations"].append({
