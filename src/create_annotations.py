@@ -121,7 +121,9 @@ class CreateCocoFormatInstances():
 
                 # panoptic
                 pan_segment_info = {}
-                pan_segments_info = []
+                pan_segments_info = {'segments_info': [],
+                                     'file_name': self.cache_file_name,
+                                     'image_id': self.cache_image_id}
                 pan_segment_id = 0
 
                 for i in contours:
@@ -133,15 +135,11 @@ class CreateCocoFormatInstances():
                         "area": cv2.contourArea(contour),
                     }
                     pan_segment_id += 1  # TODO: check if it is correct, compare JSON
-                    pan_segments_info.append(pan_segment_info)
+                    pan_segments_info['segments_info'].append(pan_segment_info)
 
                 if instance_annotation['area'] > 0:
                     self.coco_instance["annotations"].append(instance_annotation)
-                    self.coco_panoptic["annotations"].append({
-                        "segments_info": pan_segments_info,
-                        "file_name": self.cache_file_name[:-4] + '.png',
-                        "image_id": self.cache_image_id,
-                    })
+                    self.coco_panoptic["annotations"].append(pan_segments_info)
 
                     self.cache_annotation_id += 1
 
