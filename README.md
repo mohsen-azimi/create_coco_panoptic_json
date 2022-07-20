@@ -7,9 +7,9 @@
 
 ## 1. Clone the repository
 
-`$ git clone https://github.com/mohsen-azimi/smart-4wd-robot.git robot`
+`$ git clone https://github.com/mohsen-azimi/create_coco_panoptic_json.git robot`
 
-`$ cd robot`
+`$ cd create_coco_panoptic_json`
 
 ## 2. Create `conda` environment
 
